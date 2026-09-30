@@ -3,115 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f3f0e8">
-  <script>
-    const dashboardData={
-      projects:[
-        {name:'Studios PammeRose',area:'STUDIO',status:'En producción',progress:62,target:'15 OCT',next:'Definir identidad visual',priority:'Alta',detail:'El hogar de todo lo que viene.'},
-        {name:'Final Paradox',area:'SERIES',status:'En producción',progress:45,target:'31 OCT',next:'Editar episodio',priority:'Alta',detail:'21 episodios grabados'},
-        {name:'Metroid Bounty Hunter',area:'SERIES',status:'En producción',progress:38,target:'22 NOV',next:'Grabar siguiente bloque',priority:'Alta',detail:'Una nueva cacería en marcha.'},
-        {name:'Los Gauchos',area:'SERIES',status:'Planificación',progress:24,target:'12 DIC',next:'Cerrar guion',priority:'Media',detail:'La próxima aventura toma forma.'},
-        {name:'Silencio',area:'SERIES',status:'Planificación',progress:18,target:'05 DIC',next:'Diseñar atmósfera',priority:'Media',detail:'Una historia en desarrollo.'},
-        {name:'Shorts / promoción',area:'GROWTH',status:'En producción',progress:57,target:'CONTINUO',next:'Publicar próximo short',priority:'Alta',detail:'Pequeñas piezas, nuevas puertas.'},
-        {name:'Twitch',area:'COMMUNITY',status:'Activo',progress:48,target:'CONTINUO',next:'Preparar próximo stream',priority:'Media',detail:'En vivo, construyendo comunidad.'},
-        {name:'Patreon',area:'COMMUNITY',status:'En producción',progress:33,target:'30 OCT',next:'Preparar recompensa',priority:'Media',detail:'Un espacio más cerca de la comunidad.'},
-        {name:'Especial 1000 suscriptores',area:'MILESTONE',status:'Planificación',progress:72,target:'18 OCT',next:'Terminar edición',priority:'Alta',detail:'Un hito construido entre todos.'},
-        {name:'Backlog de renders Flashback',area:'BACKLOG',status:'En producción',progress:29,target:'28 NOV',next:'Renderizar secuencia',priority:'Baja',detail:'Rescatando historias del archivo.'}
-      ],
-      metrics:{subscribers:842,income:340,milestones:4},
-      growth:[
-        {label:'Suscriptores',display:'842',delta:'+18% este semestre',color:'green',points:[28,34,31,47,54,65,61,79,88]},
-        {label:'Horas de reproducción',display:'3.16k',delta:'+24% este semestre',color:'amber',points:[22,26,38,32,49,58,54,73,86]},
-        {label:'Videos publicados',display:'34',delta:'+8 desde abril',color:'clay',points:[15,24,21,34,40,39,53,65,78]},
-        {label:'Episodios completados',display:'21',delta:'Final Paradox',color:'sky',points:[18,21,27,31,42,49,57,70,83]},
-        {label:'Twitch · horas en vivo',display:'28 h',delta:'+6 h este mes',color:'sky',points:[20,25,19,39,33,46,58,52,74]},
-        {label:'Patreon · miembros',display:'18',delta:'+5 desde abril',color:'amber',points:[10,18,15,24,31,37,43,55,68]},
-        {label:'Ingresos · mes',display:'$340',delta:'+12% vs. mes anterior',color:'clay',points:[19,22,29,24,38,47,44,59,72]},
-        {label:'Alcance en redes',display:'12.4k',delta:'+31% este semestre',color:'green',points:[17,23,21,36,43,40,58,69,89]}
-      ],
-      roadmap:[
-        {month:'SEP',items:[{title:'Publicación de shorts',date:'EN CURSO'},{title:'Ritmo de Twitch',date:'CONTINUO'}]},
-        {month:'OCT',items:[{title:'Especial 1000 suscriptores',date:'18 OCT'},{title:'Patreon · nueva recompensa',date:'30 OCT'},{title:'Final Paradox',date:'31 OCT'}]},
-        {month:'NOV',items:[{title:'Metroid Bounty Hunter',date:'22 NOV'},{title:'Backlog Flashback',date:'28 NOV'}]},
-        {month:'DIC',items:[{title:'Silencio',date:'05 DIC'},{title:'Los Gauchos',date:'12 DIC'}]}
-      ],
-      life:[
-        {name:'Body',icon:'body',items:[{label:'Movimiento',progress:68},{label:'Alimentación',progress:74},{label:'Descanso',progress:59},{label:'Bienestar',progress:82}]},
-        {name:'Personal',icon:'personal',items:[{label:'Tiempo para mí',progress:57},{label:'Creatividad libre',progress:86},{label:'Meditación',progress:48},{label:'Ocio',progress:72}]},
-        {name:'Family',icon:'family',items:[{label:'Hijos',progress:88},{label:'Tiempo juntos',progress:79},{label:'Actividades',progress:66}]},
-        {name:'Home',icon:'home',items:[{label:'Arreglos',progress:42},{label:'Organización',progress:63},{label:'Mejoras',progress:37},{label:'Proyectos de casa',progress:51}]}
-      ]
-    };
-  </script>
+  <meta name="theme-color" content="#2c4337">
+  <meta name="description" content="PammeRose Creative Studio · Control Center">
   <title>PammeRose · Control Center</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-    :root{--paper:#f3f0e8;--surface:#fbfaf6;--ink:#252820;--muted:#77796f;--line:#e2ded3;--forest:#344a3b;--moss:#738260;--amber:#d69a42;--clay:#b66f50;--sky:#78939a;--soft-amber:#f2e7d3;--soft-green:#e4e9df;--soft-clay:#f0e2dc;--shadow:0 12px 30px #2d30260b;font-family:'DM Sans',sans-serif}
-    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);min-width:320px}button{font:inherit}.topbar{height:76px;padding:0 5.3vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#fbfaf6c7}.brand{display:flex;gap:12px;align-items:center}.brand-mark{width:34px;height:34px;border-radius:10px 10px 10px 3px;background:var(--forest);display:grid;place-items:center;color:#f6d393;font:700 15px Manrope,sans-serif;transform:rotate(-4deg)}.brand-name{font:800 13px Manrope,sans-serif;letter-spacing:.03em}.brand-caption{color:var(--muted);font-size:10px;margin-top:2px}.topbar-right{display:flex;align-items:center;gap:19px;color:var(--muted);font-size:11px}.live-dot{width:7px;height:7px;border-radius:50%;background:#71875a;display:inline-block;margin-right:6px;box-shadow:0 0 0 3px #71875a20}.avatar{width:33px;height:33px;border-radius:50%;background:var(--soft-amber);display:grid;place-items:center;color:#76552c;font:700 11px Manrope,sans-serif}
-    .layout{max-width:1500px;margin:auto;padding:34px 5.3vw 70px}.tabbar{display:flex;border-bottom:1px solid var(--line);gap:30px;margin-bottom:35px}.tab-button{border:0;background:none;color:var(--muted);padding:0 1px 15px;font:700 11px Manrope,sans-serif;letter-spacing:.12em;cursor:pointer;position:relative;transition:color .2s}.tab-button:hover,.tab-button[aria-selected=true]{color:var(--ink)}.tab-button[aria-selected=true]::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--amber)}.view[hidden]{display:none}.page-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px}.eyebrow{color:var(--moss);font:500 10px 'DM Mono',monospace;letter-spacing:.13em;text-transform:uppercase;margin:0 0 8px}h1{font:800 clamp(27px,3.3vw,39px) Manrope,sans-serif;letter-spacing:-.035em;line-height:1.08;margin:0}.subtitle{color:var(--muted);font-size:13px;margin:9px 0 0}.date-stamp{color:var(--muted);font:11px 'DM Mono',monospace;white-space:nowrap;padding-bottom:3px}.section-heading{display:flex;align-items:center;justify-content:space-between;margin:38px 0 15px}.section-heading h2{margin:0;font:700 14px Manrope,sans-serif}.section-note{color:var(--muted);font-size:11px}.section-kicker{color:var(--muted);font:10px 'DM Mono',monospace;letter-spacing:.1em}
-    .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);background:var(--surface);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}.kpi{min-height:117px;padding:19px 19px 15px;border-right:1px solid var(--line);position:relative}.kpi:last-child{border-right:0}.kpi-label{font-size:10px;color:var(--muted);min-height:26px;line-height:1.35}.kpi-value{font:700 30px Manrope,sans-serif;letter-spacing:-.06em;margin-top:7px}.kpi-unit{color:var(--muted);font:11px 'DM Mono',monospace;letter-spacing:0}.kpi-foot{margin-top:6px;font-size:9px;color:var(--moss)}.kpi-mark{position:absolute;right:16px;top:18px;width:5px;height:5px;border-radius:50%;background:var(--amber)}
-    .project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.project-card{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:17px 18px 15px;min-width:0;transition:transform .25s,box-shadow .25s,border-color .25s;animation:rise .5s both;animation-delay:calc(var(--i)*35ms)}.project-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#d3cbbb}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}.project-top{display:flex;justify-content:space-between;align-items:start;gap:10px}.project-title{font:700 13px Manrope,sans-serif;line-height:1.35;overflow-wrap:anywhere}.project-area{color:var(--muted);font:9px 'DM Mono',monospace;letter-spacing:.08em;margin-top:4px}.priority{flex:0 0 auto;border-radius:3px;padding:4px 6px;font:9px 'DM Mono',monospace;text-transform:uppercase}.priority-alta{background:var(--soft-clay);color:#92563e}.priority-media{background:var(--soft-amber);color:#88622c}.priority-baja{background:var(--soft-green);color:#566846}.project-status{margin-top:15px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:10px}.status-label{display:inline-flex;align-items:center;gap:6px}.status-dot{width:6px;height:6px;border-radius:50%;background:var(--moss)}.status-en-produccion .status-dot{background:var(--amber)}.status-planificacion .status-dot{background:var(--sky)}.progress-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font:10px 'DM Mono',monospace}.progress-track{height:5px;border-radius:8px;background:#e9e6dd;overflow:hidden;margin-top:7px}.progress-fill{width:0;height:100%;border-radius:inherit;background:var(--moss);transition:width 1s cubic-bezier(.2,.7,.2,1)}.project-card:nth-child(3n+2) .progress-fill{background:var(--amber)}.project-card:nth-child(3n) .progress-fill{background:var(--clay)}.project-meta{display:flex;justify-content:space-between;gap:12px;padding-top:13px;margin-top:13px;border-top:1px solid #eeece5;font-size:10px}.project-target{color:var(--muted);white-space:nowrap}.project-next{color:var(--forest);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.project-detail{color:var(--muted);font-size:10px;margin-top:9px;min-height:14px}
-    .growth-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.chart-card{padding:15px 16px 12px;background:var(--surface);border:1px solid var(--line);border-radius:7px;min-width:0}.chart-head{display:flex;justify-content:space-between;gap:8px;align-items:start}.chart-title{font-size:10px;color:var(--muted)}.chart-current{font:700 18px Manrope,sans-serif;letter-spacing:-.04em;margin-top:5px}.chart-delta{color:var(--moss);font:9px 'DM Mono',monospace;text-align:right;margin-top:4px}.chart{height:63px;width:100%;margin-top:12px;overflow:visible}.chart-line{fill:none;stroke:var(--forest);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260;stroke-dashoffset:260;animation:draw 1.4s .2s ease-out forwards}.chart-area{opacity:.09}@keyframes draw{to{stroke-dashoffset:0}}.chart-labels{display:flex;justify-content:space-between;color:#9b9b91;font:8px 'DM Mono',monospace;margin-top:2px}.chart-clay .chart-line{stroke:var(--clay)}.chart-amber .chart-line{stroke:var(--amber)}.chart-sky .chart-line{stroke:var(--sky)}
-    .roadmap{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:21px 20px 18px;overflow:hidden}.roadmap-track{height:2px;position:absolute;top:48px;left:7%;right:7%;background:#ddd9ce}.roadmap-track:after{content:'';position:absolute;inset:0 auto 0 0;width:36%;background:var(--amber)}.roadmap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}.roadmap-month{padding-right:14px;min-width:0}.month-head{display:flex;gap:10px;align-items:center;position:relative;z-index:1}.month-dot{width:9px;height:9px;border:2px solid var(--surface);border-radius:50%;background:#b6b8aa;box-shadow:0 0 0 1px #b6b8aa}.roadmap-month:first-child .month-dot,.roadmap-month:nth-child(2) .month-dot{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}.month-name{font:700 10px 'DM Mono',monospace;letter-spacing:.08em}.month-items{list-style:none;padding:17px 0 0 19px;margin:0;display:grid;gap:10px}.month-items li{font-size:10px;line-height:1.4;color:#5f6158;position:relative}.month-items li:before{content:'';position:absolute;width:3px;height:3px;background:var(--clay);border-radius:50%;left:-9px;top:5px}.month-items time{display:block;color:#99998f;font:8px 'DM Mono',monospace;margin-top:3px}
-    .life-banner{border-radius:8px;background:var(--forest);color:#f8f5ed;display:grid;grid-template-columns:auto minmax(160px,1fr) auto;gap:25px;align-items:center;padding:23px 26px;position:relative;overflow:hidden}.life-banner:after{content:'';position:absolute;right:17%;top:-90px;width:230px;height:230px;border:1px solid #ffffff12;border-radius:50%;box-shadow:0 0 0 26px #ffffff08,0 0 0 52px #ffffff05;pointer-events:none}.life-number{font:700 42px Manrope,sans-serif;letter-spacing:-.06em;white-space:nowrap}.life-number small{font:500 12px 'DM Mono',monospace;color:#c2c7b7;letter-spacing:0}.life-copy strong{display:block;font:700 12px Manrope,sans-serif}.life-copy span{display:block;color:#c2c7b7;font-size:10px;margin-top:4px}.life-progress{height:7px;border-radius:8px;background:#ffffff24;overflow:hidden;margin-top:12px}.life-progress span{display:block;width:0;height:100%;border-radius:inherit;background:#e6b768;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}.life-caption{z-index:1;color:#c2c7b7;font:9px 'DM Mono',monospace;text-align:right}.life-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.life-card{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:19px 20px 17px;min-height:202px}.life-card-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #eeece5}.life-title-wrap{display:flex;align-items:center;gap:10px}.life-icon{height:29px;width:29px;display:grid;place-items:center;border-radius:7px;background:var(--soft-green);color:var(--forest)}.life-icon svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.life-card:nth-child(2) .life-icon{background:var(--soft-amber);color:#94662e}.life-card:nth-child(3) .life-icon{background:var(--soft-clay);color:var(--clay)}.life-card:nth-child(4) .life-icon{background:#e4e9e9;color:#58747a}.life-title{font:700 13px Manrope,sans-serif}.life-percent{font:700 16px Manrope,sans-serif}.life-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px;row-gap:13px;padding-top:15px}.life-item{min-width:0}.life-item-top{display:flex;justify-content:space-between;gap:5px;color:#62645b;font-size:10px}.life-item-top span:last-child{font:9px 'DM Mono',monospace;color:#95958b}.life-item-track{height:3px;background:#e9e6dd;border-radius:4px;margin-top:6px;overflow:hidden}.life-item-track span{display:block;width:0;height:100%;border-radius:inherit;background:var(--moss);transition:width .9s cubic-bezier(.2,.7,.2,1)}.life-card:nth-child(2) .life-item-track span{background:var(--amber)}.life-card:nth-child(3) .life-item-track span{background:var(--clay)}.life-card:nth-child(4) .life-item-track span{background:var(--sky)}.life-footer{margin-top:29px;display:flex;justify-content:space-between;color:var(--muted);font:9px 'DM Mono',monospace}
-    @media(max-width:1050px){.layout{padding-left:4vw;padding-right:4vw}.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.kpi:nth-child(3){border-right:0}.kpi:nth-child(-n+3){border-bottom:1px solid var(--line)}.growth-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:700px){.topbar{height:64px;padding:0 20px}.topbar-right{gap:12px}.topbar-status{display:none}.layout{padding:24px 18px 45px}.tabbar{gap:23px;margin-bottom:27px}.tab-button{font-size:9px;letter-spacing:.09em}.page-head{align-items:start}h1{font-size:29px}.date-stamp{font-size:9px}.section-heading{margin-top:30px}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.project-card{padding:14px 13px 12px}.project-title{font-size:11px}.project-meta{font-size:9px}.project-next{max-width:56%}.priority{font-size:8px;padding:4px}.roadmap{padding:18px 12px 16px}.roadmap-track{left:8%;right:8%}.roadmap-month{padding-right:5px}.month-head{gap:5px}.month-name{font-size:8px}.month-items{padding-left:11px}.month-items li{font-size:9px}.life-banner{grid-template-columns:auto 1fr;gap:14px;padding:19px}.life-number{font-size:36px}.life-caption{grid-column:2;text-align:left;margin-top:-6px}.life-grid{gap:8px}.life-card{padding:15px 13px}.life-items{grid-template-columns:1fr;row-gap:11px}.life-card-head{align-items:start}}
-    @media(max-width:430px){.brand-caption{display:none}.page-head{display:block}.date-stamp{margin-top:12px}.kpi{min-height:100px;padding:14px 12px}.kpi-label{font-size:9px}.kpi-value{font-size:25px}.project-grid{grid-template-columns:1fr}.project-card{padding:15px 16px 13px}.project-title{font-size:12px}.growth-grid{gap:8px}.chart-card{padding:12px 11px 10px}.chart-title{font-size:9px}.chart-current{font-size:15px}.chart{height:50px}.roadmap-track{left:9%;right:9%}.month-name{font-size:7px;letter-spacing:.03em}.month-items li{font-size:8px}.month-items time{font-size:7px}.life-grid{grid-template-columns:1fr}.life-items{grid-template-columns:repeat(2,minmax(0,1fr))}.life-card{min-height:unset}}
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><div class="brand" aria-label="PammeRose"><div class="brand-mark" aria-hidden="true">P</div><div><div class="brand-name">PAMME ROSE</div><div class="brand-caption">creative universe</div></div></div><div class="topbar-right"><span class="topbar-status"><i class="live-dot"></i>En movimiento</span><span id="todayLabel"></span><div class="avatar" aria-label="Pamme">PR</div></div></header>
+  <header class="topbar">
+    <div class="brand" aria-label="PammeRose">
+      <div class="brand-mark" aria-hidden="true">P</div>
+      <div>
+        <div class="brand-name">PAMME ROSE</div>
+        <div class="brand-caption">CREATIVE UNIVERSE</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-status"><i class="live-dot"></i>En movimiento</span>
+      <span id="todayLabel"></span>
+      <div class="avatar" aria-label="Pamme">PR</div>
+    </div>
+  </header>
+
   <main class="layout">
-    <nav class="tabbar" role="tablist" aria-label="Espacios de Pamme"><button class="tab-button" id="tab-studio" type="button" role="tab" aria-selected="true" aria-controls="studio-view">PAMMEROSE</button><button class="tab-button" id="tab-life" type="button" role="tab" aria-selected="false" aria-controls="life-view">PAMME LIFESTYLE</button></nav>
-    <section class="view" id="studio-view" role="tabpanel" aria-labelledby="tab-studio"><header class="page-head"><div><p class="eyebrow">Mi universo creativo</p><h1>PAMMEROSE</h1><p class="subtitle">Creative Studio · Control Center</p></div><div class="date-stamp" id="studioDate"></div></header><div class="kpi-grid" id="kpiGrid" aria-label="Indicadores principales"></div><div class="section-heading"><h2>Production</h2><span class="section-kicker" id="projectCount"></span></div><div class="project-grid" id="projectGrid"></div><div class="section-heading"><h2>Growth</h2><span class="section-note">Evolución · últimos 6 meses</span></div><div class="growth-grid" id="growthGrid"></div><div class="section-heading"><h2>Roadmap</h2><span class="section-note">El camino que estamos construyendo</span></div><div class="roadmap" id="roadmap"></div></section>
-    <section class="view" id="life-view" role="tabpanel" aria-labelledby="tab-life" hidden><header class="page-head"><div><p class="eyebrow">Una vida que también estoy creando</p><h1>PAMME LIFESTYLE</h1><p class="subtitle">Energía para todo lo que importa.</p></div><div class="date-stamp" id="lifeDate"></div></header><div class="life-banner" id="lifeBanner"></div><div class="section-heading"><h2>Mi vida, en equilibrio</h2><span class="section-note">Pequeños avances, vida real</span></div><div class="life-grid" id="lifeGrid"></div><div class="life-footer"><span>PAMME LIFESTYLE</span><span>PROGRESO, NO PERFECCIÓN</span></div></section>
+    <nav class="tabbar" role="tablist" aria-label="Espacios de Pamme">
+      <button class="tab-button" id="tab-studio" type="button" role="tab" aria-selected="true" aria-controls="studio-view">PAMMEROSE</button>
+      <button class="tab-button" id="tab-life" type="button" role="tab" aria-selected="false" aria-controls="life-view">PAMME LIFESTYLE</button>
+    </nav>
+
+    <section class="view" id="studio-view" role="tabpanel" aria-labelledby="tab-studio">
+      <header class="studio-hero">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">Mi universo creativo · Control Center</p>
+          <h1>PAMMEROSE</h1>
+          <p class="hero-subtitle">Creative Studio · Control Center</p>
+          <p class="hero-promise">Mirá todo lo que estoy construyendo.</p>
+          <p class="hero-date" id="studioDate"></p>
+        </div>
+        <div class="hero-progress">
+          <div class="progress-ring" id="studioProgressRing" role="img" aria-label="Progreso general">
+            <span class="progress-ring-value" id="studioProgressText">0%</span>
+          </div>
+          <span class="progress-ring-label">Progreso general</span>
+        </div>
+      </header>
+
+      <section class="kpi-grid" id="kpiGrid" aria-label="Indicadores principales"></section>
+
+      <section aria-labelledby="production-heading">
+        <div class="section-heading">
+          <div class="section-title-wrap"><span class="section-index">01</span><h2 id="production-heading">Production</h2></div>
+          <span class="section-kicker" id="projectCount"></span>
+        </div>
+        <div class="project-grid" id="projectGrid"></div>
+      </section>
+
+      <section aria-labelledby="growth-heading">
+        <div class="section-heading">
+          <div class="section-title-wrap"><span class="section-index">02</span><h2 id="growth-heading">Growth</h2></div>
+          <span class="section-note">Evolución · últimos 6 meses</span>
+        </div>
+        <div class="growth-grid" id="growthGrid"></div>
+      </section>
+
+      <section aria-labelledby="roadmap-heading">
+        <div class="section-heading">
+          <div class="section-title-wrap"><span class="section-index">03</span><h2 id="roadmap-heading">Roadmap</h2></div>
+          <span class="section-note">El camino que estamos construyendo</span>
+        </div>
+        <div class="roadmap" id="roadmap"></div>
+      </section>
+    </section>
+
+    <section class="view" id="life-view" role="tabpanel" aria-labelledby="tab-life" hidden>
+      <header class="page-head">
+        <div>
+          <p class="hero-eyebrow">Una vida que también estoy creando</p>
+          <h1>PAMME LIFESTYLE</h1>
+          <p class="hero-subtitle">Energía para todo lo que importa.</p>
+        </div>
+        <div class="date-stamp" id="lifeDate"></div>
+      </header>
+      <div class="life-banner" id="lifeBanner"></div>
+      <div class="section-heading">
+        <div class="section-title-wrap"><span class="section-index">04</span><h2>Mi vida, en equilibrio</h2></div>
+        <span class="section-note">Pequeños avances, vida real</span>
+      </div>
+      <div class="life-grid" id="lifeGrid"></div>
+      <footer class="life-footer"><span>PAMME LIFESTYLE</span><span>PROGRESO, NO PERFECCIÓN</span></footer>
+    </section>
   </main>
-  <script>
-    const average=values=>Math.round(values.reduce((sum,value)=>sum+value,0)/values.length);
-    const studioProgress=average(dashboardData.projects.map(project=>project.progress));
-    const activeProjects=dashboardData.projects.filter(project=>project.status!=='Planificación').length;
-    const productionProjects=dashboardData.projects.filter(project=>project.status==='En producción').length;
-    const lifeProgress=average(dashboardData.life.flatMap(section=>section.items.map(item=>item.progress)));
-    const dateLabel=new Intl.DateTimeFormat('es-AR',{day:'2-digit',month:'short',year:'numeric'}).format(new Date()).toUpperCase();
-    document.getElementById('todayLabel').textContent=dateLabel;
-    document.getElementById('studioDate').textContent=`CORTE · ${dateLabel}`;
-    document.getElementById('lifeDate').textContent=`HOY · ${dateLabel}`;
-    const kpis=[
-      {label:'Progreso general',value:`${studioProgress}%`,foot:'El universo sigue creciendo'},
-      {label:'Proyectos activos',value:activeProjects,foot:`de ${dashboardData.projects.length} en el estudio`},
-      {label:'En producción',value:productionProjects,foot:'Manos a la obra'},
-      {label:'Próximos hitos',value:dashboardData.metrics.milestones,foot:'En los próximos 60 días'},
-      {label:'Suscriptores',value:dashboardData.metrics.subscribers.toLocaleString('es-AR'),foot:'Cada persona cuenta'},
-      {label:'Ingresos',value:`$${dashboardData.metrics.income}`,foot:'Este mes · USD'}
-    ];
-    document.getElementById('kpiGrid').innerHTML=kpis.map(item=>`<article class="kpi"><i class="kpi-mark"></i><div class="kpi-label">${item.label}</div><div class="kpi-value">${item.value}</div><div class="kpi-foot">${item.foot}</div></article>`).join('');
-    document.getElementById('projectCount').textContent=`${dashboardData.projects.length} PROYECTOS · VISION EN MARCHA`;
-    document.getElementById('projectGrid').innerHTML=dashboardData.projects.map((project,index)=>{
-      const statusClass=project.status.toLowerCase().replaceAll(' ','-');
-      return `<article class="project-card" style="--i:${index}"><div class="project-top"><div><div class="project-title">${project.name}</div><div class="project-area">${project.area}</div></div><span class="priority priority-${project.priority.toLowerCase()}">${project.priority}</span></div><div class="project-status"><span class="status-label status-${statusClass}"><i class="status-dot"></i>${project.status}</span><span>${project.target}</span></div><div class="progress-row"><span>Progreso</span><span>${project.progress}%</span></div><div class="progress-track"><div class="progress-fill" data-progress="${project.progress}%"></div></div><div class="project-detail">${project.detail}</div><div class="project-meta"><span class="project-target">OBJETIVO · ${project.target}</span><span class="project-next">Próximo → ${project.next}</span></div></article>`;
-    }).join('');
-    function makeChart(points){
-      const width=220,height=63,step=width/(points.length-1);
-      const coords=points.map((point,index)=>[index*step,height-(point/100)*(height-9)-3]);
-      const path=coords.map(([x,y],index)=>`${index?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
-      const [lastX,lastY]=coords.at(-1);
-      return `<svg class="chart" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><path class="chart-area" d="${path} L${width} ${height} L0 ${height} Z" fill="currentColor"/><path class="chart-line" d="${path}"/><circle cx="${lastX}" cy="${lastY}" r="3" fill="currentColor"/></svg>`;
-    }
-    document.getElementById('growthGrid').innerHTML=dashboardData.growth.map(metric=>`<article class="chart-card chart-${metric.color}"><div class="chart-head"><div><div class="chart-title">${metric.label}</div><div class="chart-current">${metric.display}</div></div><div class="chart-delta">${metric.delta}</div></div>${makeChart(metric.points)}<div class="chart-labels"><span>ABR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AGO</span><span>SEP</span></div></article>`).join('');
-    document.getElementById('roadmap').innerHTML=`<div class="roadmap-track"></div><div class="roadmap-grid">${dashboardData.roadmap.map(month=>`<section class="roadmap-month"><div class="month-head"><i class="month-dot"></i><span class="month-name">${month.month}</span></div><ul class="month-items">${month.items.map(item=>`<li>${item.title}<time>${item.date}</time></li>`).join('')}</ul></section>`).join('')}</div>`;
-    const icons={body:'<path d="M12 3v3m0 0a3 3 0 1 0 0-6m0 6v4m-5 9 1.5-6 3.5-2 3.5 2L17 19m-5-8-3-2-3 1m11 9-1.5-6"/>',personal:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/><path d="M9 12h6"/>',family:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20v-1a6 6 0 0 1 12 0v1m1-5a5 5 0 0 1 5 5"/>',home:'<path d="m3 11 9-7 9 7v9h-6v-6H9v6H3z"/><path d="M7 10h.01M17 10h.01"/>'};
-    document.getElementById('lifeBanner').innerHTML=`<div class="life-number">${lifeProgress}<small>%</small></div><div class="life-copy"><strong>LIFE PROGRESS</strong><span>Avanzar también es cuidarme en el camino.</span><div class="life-progress"><span data-progress="${lifeProgress}%"></span></div></div><div class="life-caption">${dashboardData.life.length} ÁREAS<br>DE VIDA</div>`;
-    document.getElementById('lifeGrid').innerHTML=dashboardData.life.map(section=>{
-      const sectionProgress=average(section.items.map(item=>item.progress));
-      return `<article class="life-card"><div class="life-card-head"><div class="life-title-wrap"><span class="life-icon"><svg viewBox="0 0 24 24" aria-hidden="true">${icons[section.icon]}</svg></span><span class="life-title">${section.name}</span></div><span class="life-percent">${sectionProgress}%</span></div><div class="life-items">${section.items.map(item=>`<div class="life-item"><div class="life-item-top"><span>${item.label}</span><span>${item.progress}%</span></div><div class="life-item-track"><span data-progress="${item.progress}%"></span></div></div>`).join('')}</div></article>`;
-    }).join('');
-    requestAnimationFrame(()=>document.querySelectorAll('[data-progress]').forEach(bar=>{bar.style.width=bar.dataset.progress}));
-    const tabs=document.querySelectorAll('.tab-button');
-    tabs.forEach(tab=>tab.addEventListener('click',()=>{
-      tabs.forEach(item=>item.setAttribute('aria-selected',String(item===tab)));
-      document.querySelectorAll('.view').forEach(view=>{view.hidden=view.id!==tab.getAttribute('aria-controls')});
-    }));
-  </script>
 </body>
 </html>
