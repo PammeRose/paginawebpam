@@ -139,7 +139,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
 .orbit-future { flex: 0 0 auto; margin-left: auto; padding: 6px 9px; border: 1px dashed #c2a98d; color: #826e5f; font: 9px 'DM Mono', monospace; white-space: nowrap; }
 
 body[data-theme='studio'] .topbar {
-  background: #fd9f9f;
+  background: #ffbac4;
   color: #34241f;
 }
 body[data-theme='studio'] .brand-mark {
@@ -150,14 +150,14 @@ body[data-theme='studio'] .brand-caption,
 body[data-theme='studio'] .topbar-right { color: #603c38; }
 body[data-theme='studio'] .live-dot { background: #53623d; box-shadow: 0 0 0 4px #53623d24; }
 body[data-theme='studio'] .avatar { border-color: #a7605d; color: #34241f; }
-body[data-theme='studio'] .studio-hero { background-color: #fd9f9f; color: #34241f; }
+body[data-theme='studio'] .studio-hero { background-color: #ffbac4; color: #34241f; }
 body[data-theme='studio'] .hero-eyebrow { color: #704033; }
 body[data-theme='studio'] .studio-hero h1 { color: #c45137; }
 body[data-theme='studio'] .hero-promise { color: #462b26; }
 body[data-theme='studio'] .hero-date,
 body[data-theme='studio'] .progress-ring-label { color: #634842; }
 body[data-theme='studio'] .progress-ring { background: conic-gradient(#8c543d var(--progress), #34241f24 var(--progress)); }
-body[data-theme='studio'] .progress-ring::before { border-color: #34241f35; background: #fd9f9f; }
+body[data-theme='studio'] .progress-ring::before { border-color: #34241f35; background: #ffbac4; }
 body[data-theme='studio'] .progress-ring-value { color: #34241f; }
 
 .kpi-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 5px; background: var(--surface); box-shadow: var(--shadow); }
