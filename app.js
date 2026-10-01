@@ -137,6 +137,9 @@ const tabs = [...document.querySelectorAll('.tab-button')];
 function activateTab(tab, moveFocus = false) {
   tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
   document.querySelectorAll('.view').forEach(view => { view.hidden = view.id !== tab.getAttribute('aria-controls'); });
+  const theme = tab.id === 'tab-life' ? 'lifestyle' : 'studio';
+  document.documentElement.dataset.theme = theme;
+  document.body.dataset.theme = theme;
   if (moveFocus) tab.focus();
 }
 

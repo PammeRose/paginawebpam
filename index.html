@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="studio">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
-<body>
+<body data-theme="studio">
   <header class="topbar">
     <div class="brand" aria-label="PammeRose">
       <div class="brand-mark" aria-hidden="true">P</div>
@@ -33,10 +33,13 @@
 
     <section class="view" id="studio-view" role="tabpanel" aria-labelledby="tab-studio">
       <header class="studio-hero">
+        <div class="studio-scene">
+          <img src="2.png" alt="Un campamento creativo bajo los árboles otoñales de Minecraft">
+          <span class="scene-caption">EL MUNDO PAMMEROSE</span>
+        </div>
         <div class="hero-copy">
-          <p class="hero-eyebrow">Mi universo creativo · Control Center</p>
+          <p class="hero-eyebrow">Creative Studio · Control Center</p>
           <h1>PAMMEROSE</h1>
-          <p class="hero-subtitle">Creative Studio · Control Center</p>
           <p class="hero-promise">Mirá todo lo que estoy construyendo.</p>
           <p class="hero-date" id="studioDate"></p>
         </div>
@@ -47,6 +50,17 @@
           <span class="progress-ring-label">Progreso general</span>
         </div>
       </header>
+
+      <div class="studio-orbit" aria-label="Áreas del universo creativo">
+        <span class="orbit-label">UNIVERSO EN EXPANSIÓN</span>
+        <span class="orbit-item">YouTube <i class="orbit-dot"></i></span>
+        <span class="orbit-item">Twitch <i class="orbit-dot"></i></span>
+        <span class="orbit-item">Instagram <i class="orbit-dot"></i></span>
+        <span class="orbit-item">X <i class="orbit-dot"></i></span>
+        <span class="orbit-item">Mapmaking</span>
+        <span class="orbit-item">Building</span>
+        <span class="orbit-future">Otros juegos · en el horizonte</span>
+      </div>
 
       <section class="kpi-grid" id="kpiGrid" aria-label="Indicadores principales"></section>
 
