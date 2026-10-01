@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Lilita+One&family=Manrope:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Silkscreen:wght@400;700&display=swap');
+
+@font-face {
+  font-family: 'Le Petit Cochon';
+  src: url('Petit-Cochon.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
 
 :root {
   color-scheme: light;
@@ -102,7 +110,7 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
 .hero-copy, .hero-progress { position: relative; z-index: 1; }
 .hero-copy { align-self: end; padding: 16px 12px 0 0; }
 .hero-eyebrow { margin: 0 0 11px; color: #edb85a; font: 9px 'Silkscreen', monospace; letter-spacing: .02em; line-height: 1.8; text-transform: uppercase; }
-.studio-hero h1 { margin: 0; color: #ff766f; font: 400 clamp(37px, 4vw, 56px)/.98 'Lilita One', sans-serif; letter-spacing: .015em; -webkit-text-stroke: 1px #39191d; text-shadow: 0 3px 0 #39191d, 2px 4px 0 #1b1112; }
+.studio-hero h1 { margin: 0; color: #ff766f; font: 400 clamp(37px, 4vw, 56px)/.98 'Le Petit Cochon', sans-serif; letter-spacing: .015em; -webkit-text-stroke: 1px #39191d; text-shadow: 0 3px 0 #39191d, 2px 4px 0 #1b1112; }
 .hero-subtitle { margin: 11px 0 0; color: #d0d5c9; font-size: 12px; }
 .hero-promise { margin: 12px 0 0; color: #fff2dc; font: 500 13px Manrope, sans-serif; }
 .hero-date { margin: 10px 0 0; color: #cab7a6; font: 9px 'DM Mono', monospace; letter-spacing: .08em; }
