@@ -1,111 +1,104 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="studio">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2c4337">
-  <meta name="description" content="PammeRose Creative Studio · Control Center">
-  <title>PammeRose · Control Center</title>
-  <link rel="stylesheet" href="styles.css?v=pink-panels-2">
-  <script src="app.js?v=autumn-2026-10" defer></script>
-</head>
-<body data-theme="studio">
-  <header class="topbar">
-    <div class="brand" aria-label="PammeRose">
-      <div class="brand-mark" aria-hidden="true">P</div>
-      <div>
-        <div class="brand-name">PAMME ROSE</div>
-        <div class="brand-caption">CREATIVE UNIVERSE</div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <span class="topbar-status"><i class="live-dot"></i>En movimiento</span>
-      <span id="todayLabel"></span>
-      <div class="avatar" aria-label="Pamme">PR</div>
-    </div>
-  </header>
-
-  <main class="layout">
-    <nav class="tabbar" role="tablist" aria-label="Espacios de Pamme">
-      <button class="tab-button" id="tab-studio" type="button" role="tab" aria-selected="true" aria-controls="studio-view">PAMMEROSE</button>
-      <button class="tab-button" id="tab-life" type="button" role="tab" aria-selected="false" aria-controls="life-view">PAMME LIFESTYLE</button>
-    </nav>
-
-    <section class="view" id="studio-view" role="tabpanel" aria-labelledby="tab-studio">
-      <header class="studio-hero">
-        <div class="studio-scene">
-          <img src="2.png" alt="Un campamento creativo bajo los árboles otoñales de Minecraft">
-          <span class="scene-caption">EL MUNDO PAMMEROSE</span>
-        </div>
-        <div class="hero-copy">
-          <p class="hero-eyebrow">Creative Studio · Control Center</p>
-          <h1>PAMMEROSE</h1>
-          <p class="hero-promise">Mirá todo lo que estoy construyendo.</p>
-          <p class="hero-date" id="studioDate"></p>
-        </div>
-        <div class="hero-progress">
-          <div class="progress-ring" id="studioProgressRing" role="img" aria-label="Progreso general">
-            <span class="progress-ring-value" id="studioProgressText">0%</span>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PammeRose · Control Center</title>
+    <meta name="description" content="PammeRose · Creative Studio · Control Center" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar" aria-label="Cabecera de PammeRose">
+        <div class="brand-wrap">
+          <img class="brand-mark" src="whiterose.png" alt="Logo de PammeRose" />
+          <div class="brand-copy">
+            <div class="brand-name">PAMMEROSE</div>
+            <div class="brand-subtitle">CREATIVE UNIVERSE</div>
           </div>
-          <span class="progress-ring-label">Progreso general</span>
+        </div>
+
+        <div class="date-wrap" id="headerDate">04 DE OCTUBRE DE 2026</div>
+
+        <div class="heart-badge" aria-label="Badge de PR">
+          <svg class="heart-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 54c-1.8-1.4-15.8-12.2-22.8-19.4C2.4 28.6 5.4 14 18.1 14c5.2 0 8.7 2.6 13.9 8.1 5.2-5.5 8.7-8.1 13.9-8.1 12.7 0 15.7 14.6 8.9 20.6C47.8 41.8 33.8 52.6 32 54Z" />
+          </svg>
+          <span class="heart-text">PR</span>
         </div>
       </header>
 
-      <div class="studio-orbit" aria-label="Áreas del universo creativo">
-        <span class="orbit-label">UNIVERSO EN EXPANSIÓN</span>
-        <span class="orbit-item">YouTube <i class="orbit-dot"></i></span>
-        <span class="orbit-item">Twitch <i class="orbit-dot"></i></span>
-        <span class="orbit-item">Instagram <i class="orbit-dot"></i></span>
-        <span class="orbit-item">X <i class="orbit-dot"></i></span>
-        <span class="orbit-item">Mapmaking</span>
-        <span class="orbit-item">Building</span>
-        <span class="orbit-future">Otros juegos · en el horizonte</span>
-      </div>
-
-      <section class="kpi-grid" id="kpiGrid" aria-label="Indicadores principales"></section>
-
-      <section aria-labelledby="production-heading">
-        <div class="section-heading">
-          <div class="section-title-wrap"><span class="section-index">01</span><h2 id="production-heading">Production</h2></div>
-          <span class="section-kicker" id="projectCount"></span>
-        </div>
-        <div class="project-grid" id="projectGrid"></div>
+      <section class="year-strip" aria-label="Calendario anual">
+        <div class="year-block">2026</div>
+        <div class="months-row" id="monthsRow"></div>
       </section>
 
-      <section aria-labelledby="growth-heading">
-        <div class="section-heading">
-          <div class="section-title-wrap"><span class="section-index">02</span><h2 id="growth-heading">Growth</h2></div>
-          <span class="section-note">Evolución · últimos 6 meses</span>
-        </div>
-        <div class="growth-grid" id="growthGrid"></div>
+      <main class="dashboard" aria-label="Dashboard principal">
+        <section class="feature-panel">
+          <div class="feature-visual">
+            <img src="PammeRose_Base.png" alt="Avatar de PammeRose" />
+          </div>
+          <div class="feature-copy">
+            <div class="feature-logo">PAMMEROSE</div>
+            <div class="feature-subtitle">CREATIVE STUDIO · CONTROL CENTER</div>
+          </div>
+        </section>
+
+        <aside class="progress-panel">
+          <div class="progress-ring" aria-label="Road to 1000" id="progressRing">
+            <svg class="ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-bg" cx="60" cy="60" r="46"></circle>
+              <circle class="ring-progress" cx="60" cy="60" r="46"></circle>
+            </svg>
+            <div class="progress-value" id="progressValue">91%</div>
+          </div>
+          <div class="progress-label">Road to 1000</div>
+          <div class="progress-meta" id="progressMeta">1000 SUSCRIPTORES</div>
+          <div class="progress-controls" aria-label="Configuración de suscriptores">
+            <label class="progress-field">
+              <span>Actual</span>
+              <input id="currentSubscribersInput" type="number" min="0" step="1" value="916" />
+            </label>
+            <label class="progress-field">
+              <span>Meta</span>
+              <input id="goalSubscribersInput" type="number" min="1" step="1" value="1000" />
+            </label>
+          </div>
+        </aside>
+      </main>
+
+      <section class="stats-grid" id="statsGrid" aria-label="Tarjetas de métricas"></section>
+
+      <section class="calendars-row" aria-label="Calendarios del mes">
+        <article class="calendar-card" data-calendar-type="videos">
+          <div class="calendar-head">
+            <h3>VIDEOS PUBLICADOS</h3>
+            <span class="calendar-count" id="videosCount">0</span>
+          </div>
+          <div class="calendar-month" id="videosMonth">OCTUBRE</div>
+          <div class="calendar-grid" id="videosCalendar"></div>
+        </article>
+
+        <article class="calendar-card" data-calendar-type="streams">
+          <div class="calendar-head">
+            <h3>STREAMS REALIZADOS</h3>
+            <span class="calendar-count" id="streamsCount">0</span>
+          </div>
+          <div class="calendar-month" id="streamsMonth">OCTUBRE</div>
+          <div class="calendar-grid" id="streamsCalendar"></div>
+        </article>
       </section>
 
-      <section aria-labelledby="roadmap-heading">
-        <div class="section-heading">
-          <div class="section-title-wrap"><span class="section-index">03</span><h2 id="roadmap-heading">Roadmap</h2></div>
-          <span class="section-note">El camino que estamos construyendo</span>
-        </div>
-        <div class="roadmap" id="roadmap"></div>
+      <section class="milestones-panel" aria-labelledby="milestonesTitle">
+        <h2 id="milestonesTitle">Hitos del Camino</h2>
+        <div class="milestones-content" id="milestonesContent"></div>
       </section>
-    </section>
 
-    <section class="view" id="life-view" role="tabpanel" aria-labelledby="tab-life" hidden>
-      <header class="page-head">
-        <div>
-          <p class="hero-eyebrow">Una vida que también estoy creando</p>
-          <h1>PAMME LIFESTYLE</h1>
-          <p class="hero-subtitle">Energía para todo lo que importa.</p>
-        </div>
-        <div class="date-stamp" id="lifeDate"></div>
-      </header>
-      <div class="life-banner" id="lifeBanner"></div>
-      <div class="section-heading">
-        <div class="section-title-wrap"><span class="section-index">04</span><h2>Mi vida, en equilibrio</h2></div>
-        <span class="section-note">Pequeños avances, vida real</span>
-      </div>
-      <div class="life-grid" id="lifeGrid"></div>
-      <footer class="life-footer"><span>PAMME LIFESTYLE</span><span>PROGRESO, NO PERFECCIÓN</span></footer>
-    </section>
-  </main>
-</body>
+      <section class="production-section" aria-labelledby="productionTitle">
+        <h2 id="productionTitle">Producción</h2>
+        <div class="production-grid" id="productionGrid"></div>
+      </section>
+    </div>
+  </body>
 </html>
