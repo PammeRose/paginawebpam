@@ -403,6 +403,25 @@ button:focus-visible {
   border-radius: 16px;
   background: var(--pink-strong);
   box-shadow: 0 6px 0 rgba(148, 30, 30, 0.15);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(148, 30, 30, 0.19);
+}
+
+.stat-card:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 rgba(148, 30, 30, 0.15);
+}
+
+.stat-card:focus-visible {
+  outline: 3px solid var(--dark-red);
+  outline-offset: 4px;
 }
 
 .stat-card .stat-number {
@@ -419,6 +438,82 @@ button:focus-visible {
   text-transform: uppercase;
   text-align: center;
   color: var(--dark-red);
+}
+
+.metric-dialog {
+  width: min(390px, calc(100% - 32px));
+  padding: 0;
+  border: 3px solid var(--dark-red);
+  border-radius: 18px;
+  background: var(--pink);
+  color: var(--dark-red);
+  box-shadow: 0 10px 0 rgba(148, 30, 30, 0.2);
+}
+
+.metric-dialog::backdrop {
+  background: rgba(47, 27, 24, 0.48);
+  backdrop-filter: blur(2px);
+}
+
+.metric-dialog-form {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+}
+
+.metric-dialog-form h2 {
+  margin: 0;
+  font-family: 'Silkscreen', monospace;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.metric-editor-label {
+  font-family: 'VCR OSD Mono', monospace;
+  font-size: 13px;
+}
+
+.metric-editor-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 12px;
+  border: 2px solid var(--dark-red);
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--dark-red);
+  font-family: 'Pixelmix', monospace;
+  font-size: 18px;
+}
+
+.metric-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.metric-dialog-button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 2px solid var(--dark-red);
+  border-radius: 10px;
+  font-family: 'Silkscreen', monospace;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.metric-dialog-cancel {
+  background: var(--cream);
+  color: var(--dark-red);
+}
+
+.metric-dialog-save {
+  background: var(--dark-red);
+  color: var(--cream);
+}
+
+.metric-dialog-button:hover {
+  filter: brightness(1.06);
 }
 
 .calendars-row {

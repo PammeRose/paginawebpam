@@ -152,12 +152,12 @@ function formatLargeNumber(value) {
 
 function renderStats() {
   const stats = [
-    { value: dashboardData.currentSubscribers, label: 'Suscriptores' },
-    { value: dashboardData.videos, label: 'Videos' },
-    { value: dashboardData.series, label: 'Series' },
-    { value: dashboardData.completedProjects, label: 'Proyectos finalizados' },
-    { value: dashboardData.activeProjects, label: 'Proyectos activos' },
-    { value: dashboardData.mapsCreated, label: 'Mapas creados' }
+    { key: 'currentSubscribers', value: dashboardData.currentSubscribers, label: 'Suscriptores' },
+    { key: 'videos', value: dashboardData.videos, label: 'Videos' },
+    { key: 'series', value: dashboardData.series, label: 'Series' },
+    { key: 'completedProjects', value: dashboardData.completedProjects, label: 'Proyectos finalizados' },
+    { key: 'activeProjects', value: dashboardData.activeProjects, label: 'Proyectos activos' },
+    { key: 'mapsCreated', value: dashboardData.mapsCreated, label: 'Mapas creados' }
   ];
 
   const statsGrid = document.getElementById('statsGrid');
@@ -166,11 +166,73 @@ function renderStats() {
   }
 
   statsGrid.innerHTML = stats.map((item) => `
-    <article class="stat-card">
+    <button class="stat-card" type="button" data-metric="${item.key}" aria-label="Editar ${item.label}: ${formatLargeNumber(item.value)}">
       <span class="stat-number">${formatLargeNumber(item.value)}</span>
       <span class="stat-label">${item.label}</span>
-    </article>
+    </button>
   `).join('');
+}
+
+function bindMetricEditor() {
+  const dialog = document.getElementById('metricEditorDialog');
+  const form = document.getElementById('metricEditorForm');
+  const title = document.getElementById('metricEditorTitle');
+  const label = document.getElementById('metricEditorLabel');
+  const valueInput = document.getElementById('metricEditorValue');
+  const cancelButton = document.getElementById('metricEditorCancel');
+
+  if (!dialog || !form || !title || !label || !valueInput || !cancelButton) {
+    return;
+  }
+
+  let activeMetric = null;
+
+  document.getElementById('statsGrid').addEventListener('click', (event) => {
+    const card = event.target.closest('[data-metric]');
+    if (!card) {
+      return;
+    }
+
+    const metric = card.dataset.metric;
+    const metricLabel = card.querySelector('.stat-label').textContent;
+    activeMetric = metric;
+    title.textContent = `Editar ${metricLabel}`;
+    label.textContent = metricLabel;
+    valueInput.value = String(dashboardData[metric]);
+    valueInput.setAttribute('aria-label', `Nuevo valor para ${metricLabel}`);
+    dialog.showModal();
+    valueInput.focus();
+    valueInput.select();
+  });
+
+  cancelButton.addEventListener('click', () => dialog.close());
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!activeMetric || !valueInput.reportValidity()) {
+      return;
+    }
+
+    const value = Number(valueInput.value);
+    if (!Number.isSafeInteger(value) || value < 0) {
+      valueInput.setCustomValidity('Ingresa un número entero igual o mayor que cero.');
+      valueInput.reportValidity();
+      valueInput.setCustomValidity('');
+      return;
+    }
+
+    dashboardData[activeMetric] = value;
+    persistDashboardData();
+    renderStats();
+
+    if (activeMetric === 'currentSubscribers') {
+      const subscriberInput = document.getElementById('currentSubscribersInput');
+      subscriberInput.value = String(value);
+      renderRoadProgress();
+    }
+
+    dialog.close();
+  });
 }
 
 function bindProgressControls() {
@@ -328,6 +390,7 @@ function initializeDashboard() {
   renderYearStrip();
   renderRoadProgress();
   renderStats();
+  bindMetricEditor();
   bindProgressControls();
   renderCalendar('videos');
   renderCalendar('streams');
