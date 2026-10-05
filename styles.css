@@ -355,9 +355,9 @@ button:focus-visible {
 
 .progress-controls {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
-  width: min(100%, 220px);
+  width: min(100%, 170px);
   margin-top: 8px;
 }
 

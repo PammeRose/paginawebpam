@@ -126,7 +126,9 @@ function renderRoadProgress() {
   const progressPercent = getProgressPercent();
   const ring = document.querySelector('.ring-progress');
   const progressValue = document.getElementById('progressValue');
+  const progressLabel = document.getElementById('progressLabel');
   const progressMeta = document.getElementById('progressMeta');
+  const goal = Number(dashboardData.goalSubscribers || 0);
 
   if (ring) {
     const radius = 46;
@@ -134,16 +136,29 @@ function renderRoadProgress() {
     const offset = circumference - (progressPercent / 100) * circumference;
     ring.style.strokeDasharray = String(circumference);
     ring.style.strokeDashoffset = String(offset);
+    ring.setAttribute('aria-label', `Progreso hacia ${goal} suscriptores: ${formatProgressPercent(progressPercent)}`);
   }
 
   if (progressValue) {
-    progressValue.textContent = `${Math.round(progressPercent)}%`;
+    progressValue.textContent = `${formatProgressPercent(progressPercent)}%`;
+  }
+
+  if (progressLabel) {
+    progressLabel.textContent = `Road to ${formatLargeNumber(goal)}`;
   }
 
   if (progressMeta) {
-    const goal = Number(dashboardData.goalSubscribers || 0);
     progressMeta.textContent = `${goal.toLocaleString('es-AR')} SUSCRIPTORES`;
   }
+
+  const goalInput = document.getElementById('goalSubscribersInput');
+  if (goalInput && goalInput.value !== String(goal)) {
+    goalInput.value = String(goal);
+  }
+}
+
+function formatProgressPercent(value) {
+  return new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 }).format(value);
 }
 
 function formatLargeNumber(value) {
@@ -226,8 +241,6 @@ function bindMetricEditor() {
     renderStats();
 
     if (activeMetric === 'currentSubscribers') {
-      const subscriberInput = document.getElementById('currentSubscribersInput');
-      subscriberInput.value = String(value);
       renderRoadProgress();
     }
 
@@ -236,27 +249,33 @@ function bindMetricEditor() {
 }
 
 function bindProgressControls() {
-  const currentInput = document.getElementById('currentSubscribersInput');
   const goalInput = document.getElementById('goalSubscribersInput');
 
-  if (!currentInput || !goalInput) {
+  if (!goalInput) {
     return;
   }
 
-  currentInput.value = String(dashboardData.currentSubscribers || 0);
   goalInput.value = String(dashboardData.goalSubscribers || 0);
 
-  currentInput.addEventListener('input', (event) => {
-    const value = Number(event.target.value) || 0;
-    dashboardData.currentSubscribers = Math.max(0, value);
+  goalInput.addEventListener('input', (event) => {
+    const value = Number(event.target.value);
+    if (!Number.isSafeInteger(value) || value < 1) {
+      return;
+    }
+
+    dashboardData.goalSubscribers = value;
     persistDashboardData();
     renderRoadProgress();
-    renderStats();
   });
 
-  goalInput.addEventListener('input', (event) => {
-    const value = Number(event.target.value) || 0;
-    dashboardData.goalSubscribers = Math.max(1, value);
+  goalInput.addEventListener('change', () => {
+    const value = Number(goalInput.value);
+    if (!Number.isSafeInteger(value) || value < 1) {
+      goalInput.value = String(dashboardData.goalSubscribers);
+      return;
+    }
+
+    dashboardData.goalSubscribers = value;
     persistDashboardData();
     renderRoadProgress();
   });
