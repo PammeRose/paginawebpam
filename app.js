@@ -2,6 +2,7 @@
 
 const MONTHS_ES = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 const MONTHS_SHORT = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
+const WEEKDAYS_SHORT = ['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'];
 const MILESTONE_VALUES = [1000, 1009, 1486, 1986, 2020, 2026, 3126, 4000, 5000];
 const MILESTONE_POSITIONS = ['8%', '18%', '30%', '41%', '52%', '64%', '74%', '86%', '94%'];
 
@@ -284,8 +285,13 @@ function renderCalendar(type) {
 
   const selectedDays = getMonthDayEntries(type, monthDate);
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-  const firstDay = new Date(year, monthIndex, 1).getDay();
+  const firstDay = (new Date(year, monthIndex, 1).getDay() + 6) % 7;
+  const today = new Date();
   const cells = [];
+
+  WEEKDAYS_SHORT.forEach((weekday) => {
+    cells.push(`<span class="calendar-weekday" aria-hidden="true">${weekday}</span>`);
+  });
 
   for (let i = 0; i < firstDay; i += 1) {
     cells.push('<span class="calendar-empty" aria-hidden="true"></span>');
@@ -293,13 +299,26 @@ function renderCalendar(type) {
 
   for (let day = 1; day <= daysInMonth; day += 1) {
     const isSelected = selectedDays.includes(day);
+    const isToday = year === today.getFullYear()
+      && monthIndex === today.getMonth()
+      && day === today.getDate();
+    const hasPassed = year < today.getFullYear()
+      || (year === today.getFullYear() && monthIndex < today.getMonth())
+      || (year === today.getFullYear() && monthIndex === today.getMonth() && day <= today.getDate());
+    const dayClasses = [
+      'day-button',
+      hasPassed ? 'is-past' : '',
+      isToday ? 'is-today' : '',
+      isSelected ? 'is-selected' : ''
+    ].filter(Boolean).join(' ');
     cells.push(`
       <button
         type="button"
-        class="day-button ${isSelected ? 'is-selected' : ''}"
+        class="${dayClasses}"
         data-day="${day}"
         data-calendar-type="${type}"
         aria-pressed="${isSelected}"
+        ${isToday ? 'aria-current="date"' : ''}
       >${day}</button>
     `);
   }
@@ -387,6 +406,21 @@ function initializeDashboard() {
   renderCalendar('streams');
   renderMilestones();
   renderProduction();
+  scheduleDailyRefresh();
+}
+
+function scheduleDailyRefresh() {
+  const now = new Date();
+  const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const delay = nextDay.getTime() - now.getTime();
+
+  window.setTimeout(() => {
+    renderHeaderDate();
+    renderYearStrip();
+    renderCalendar('videos');
+    renderCalendar('streams');
+    scheduleDailyRefresh();
+  }, delay);
 }
 
 document.addEventListener('DOMContentLoaded', initializeDashboard);
