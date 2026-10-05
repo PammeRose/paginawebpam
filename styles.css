@@ -640,23 +640,6 @@ button:focus-visible {
   padding-top: 10px;
 }
 
-.milestone-curve {
-  position: absolute;
-  inset: 36px 0 auto 0;
-  width: 100%;
-  height: 100px;
-  overflow: visible;
-}
-
-.milestone-curve path {
-  fill: none;
-  stroke: var(--dark-red);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
-}
-
 .milestone-node {
   position: absolute;
   transform: translate(-50%, 0);
@@ -668,26 +651,55 @@ button:focus-visible {
   display: block;
   font-family: 'Pixelmix', monospace;
   font-size: 12px;
+  line-height: 1.2;
   color: var(--dark-red);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .milestone-node .node-box {
+  appearance: none;
+  display: grid;
+  place-content: center;
   width: 18px;
   height: 18px;
   margin: 0 auto;
-  background: var(--pink-strong);
+  padding: 0;
+  background: #fffaf7;
   border: 2px solid var(--dark-red);
   border-radius: 5px;
   box-shadow: 0 4px 0 rgba(148, 30, 30, 0.12);
+  cursor: pointer;
 }
 
-.milestone-node .node-box.is-blank {
+.milestone-node .node-box::before {
+  content: '✓';
+  color: #fffaf7;
+  font-family: 'Silkscreen', monospace;
+  font-size: 12px;
+  line-height: 1;
+  transform: scale(0);
+  transition: transform 0.12s ease;
+}
+
+.milestone-node .node-box:checked {
+  background: var(--pink-strong);
+}
+
+.milestone-node .node-box:checked::before {
+  transform: scale(1);
+}
+
+.milestone-node .node-box.is-blank:not(:checked) {
   background: linear-gradient(180deg, #fffcf5 0%, #d8d5ca 100%);
 }
 
-.milestone-node .node-box.is-highlight {
+.milestone-node .node-box.is-highlight:checked {
   background: var(--dark-red);
+}
+
+.milestone-node .node-box:focus-visible {
+  outline: 3px solid var(--pink-strong);
+  outline-offset: 3px;
 }
 
 .production-section {

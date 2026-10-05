@@ -16,6 +16,7 @@ const defaultDashboardData = {
   mapsCreated: 0,
   videosCalendar: {},
   streamsCalendar: {},
+  completedMilestones: [],
   productionProjects: [
     { name: 'Studios PammeRose', created: '5 de marzo 2026', state: 'En Producción', progress: 64 },
     { name: 'Final Paradox', created: '5 de agosto 2026', state: 'En Producción', progress: 29 },
@@ -347,26 +348,40 @@ function renderMilestones() {
     return;
   }
 
-  const path = 'M 6 90 C 70 40, 110 70, 170 58 S 310 18, 370 48 S 510 92, 580 54 S 722 22, 820 52';
   const nodes = MILESTONE_VALUES.map((value, index) => {
     const left = MILESTONE_POSITIONS[index];
     const isHighlight = index === 5;
     const isBlank = value > 3000;
+    const isCompleted = (dashboardData.completedMilestones || []).includes(value);
 
     return `
       <div class="milestone-node" style="left: ${left}; top: 0;">
         <span class="node-value">${value}</span>
-        <span class="node-box ${isHighlight ? 'is-highlight' : isBlank ? 'is-blank' : ''}"></span>
+        <input
+          class="node-box ${isHighlight ? 'is-highlight' : isBlank ? 'is-blank' : ''}"
+          type="checkbox"
+          data-milestone="${value}"
+          aria-label="Marcar hito alcanzado: ${value} suscriptores"
+          ${isCompleted ? 'checked' : ''}
+        />
       </div>
     `;
   }).join('');
 
-  container.innerHTML = `
-    <svg class="milestone-curve" viewBox="0 0 840 120" preserveAspectRatio="none" aria-hidden="true">
-      <path d="${path}" />
-    </svg>
-    ${nodes}
-  `;
+  container.innerHTML = nodes;
+  container.querySelectorAll('.node-box').forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      const value = Number(checkbox.dataset.milestone);
+      const completed = new Set(dashboardData.completedMilestones || []);
+      if (checkbox.checked) {
+        completed.add(value);
+      } else {
+        completed.delete(value);
+      }
+      dashboardData.completedMilestones = [...completed];
+      persistDashboardData();
+    });
+  });
 }
 
 function renderProduction() {
