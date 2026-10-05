@@ -576,6 +576,7 @@ function renderProjectTasks(project) {
 function bindProjectDetails() {
   const dialog = document.getElementById('projectDetailDialog');
   const closeButton = document.getElementById('projectDetailClose');
+  const nameInput = document.getElementById('projectNameInput');
   const statusSelect = document.getElementById('projectStatus');
   const createdInput = document.getElementById('projectCreatedInput');
   const taskForm = document.getElementById('projectTaskForm');
@@ -583,7 +584,7 @@ function bindProjectDetails() {
   const taskList = document.getElementById('projectTaskList');
   const completedGrid = document.getElementById('completedProductionGrid');
 
-  if (!dialog || !closeButton || !statusSelect || !createdInput || !taskForm || !taskInput || !taskList || !completedGrid) {
+  if (!dialog || !closeButton || !nameInput || !statusSelect || !createdInput || !taskForm || !taskInput || !taskList || !completedGrid) {
     return;
   }
 
@@ -599,6 +600,7 @@ function bindProjectDetails() {
     dialog.dataset.projectId = project.id;
     document.getElementById('projectDetailTitle').textContent = project.name;
     document.getElementById('projectDetailCreated').textContent = `Creado: ${formatProjectCreated(project.created)}`;
+    nameInput.value = project.name;
     statusSelect.value = project.state;
     createdInput.value = getProjectDateInputValue(project.created);
     renderProjectTasks(project);
@@ -620,6 +622,21 @@ function bindProjectDetails() {
   });
 
   closeButton.addEventListener('click', () => dialog.close());
+
+  nameInput.addEventListener('change', () => {
+    const project = findProductionProject(activeProjectId);
+    const name = nameInput.value.trim();
+    if (!project || !name) {
+      nameInput.value = project ? project.name : '';
+      return;
+    }
+
+    project.name = name;
+    nameInput.value = name;
+    document.getElementById('projectDetailTitle').textContent = name;
+    persistDashboardData();
+    renderProduction();
+  });
 
   statusSelect.addEventListener('change', () => {
     const project = findProductionProject(activeProjectId);

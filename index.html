@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PammeRose · Control Center</title>
     <meta name="description" content="PammeRose · Creative Studio · Control Center" />
-    <link rel="stylesheet" href="styles.css?v=production-date-progress-2" />
-    <script src="app.js?v=production-date-progress-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=production-project-name-1" />
+    <script src="app.js?v=production-project-name-1" defer></script>
   </head>
   <body>
     <div class="page-shell">
@@ -120,6 +120,9 @@
             </div>
             <button class="project-detail-close" id="projectDetailClose" type="button" aria-label="Cerrar detalle">×</button>
           </header>
+
+          <label class="project-status-label" for="projectNameInput">Nombre del proyecto</label>
+          <input class="project-status-select project-name-input" id="projectNameInput" type="text" maxlength="100" required />
 
           <label class="project-status-label" for="projectStatus">Estado</label>
           <select class="project-status-select" id="projectStatus">
