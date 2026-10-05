@@ -615,17 +615,70 @@ button:focus-visible {
   line-height: 1;
 }
 
+.milestone-decoration {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 8px;
+}
+
+.milestone-decoration img {
+  display: block;
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
 .milestones-panel {
-  margin-top: 28px;
-  background: rgba(255, 252, 245, 0.78);
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  background: linear-gradient(
+    180deg,
+    #f8c0cb 0 18%,
+    #f6a9c1 18% 36%,
+    #f294b3 36% 56%,
+    #ed819f 56% 76%,
+    #d9708d 76% 100%
+  );
   border: 3px solid var(--dark-red);
   border-radius: 18px;
   padding: 18px 18px 12px;
   box-shadow: 0 6px 0 rgba(148, 30, 30, 0.12);
 }
 
+.milestones-panel::before {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: 120px;
+  height: 84px;
+  background: repeating-linear-gradient(
+    180deg,
+    #ffe7a7 0 12px,
+    #ed91aa 12px 17px,
+    #ffe7a7 17px 34px,
+    #ed91aa 34px 39px,
+    #ffe7a7 39px 54px,
+    #ed91aa 54px 59px,
+    #ffe7a7 59px 84px
+  );
+  clip-path: polygon(
+    25% 0, 75% 0, 75% 8%, 90% 8%, 90% 22%, 100% 22%,
+    100% 78%, 90% 78%, 90% 92%, 75% 92%, 75% 100%,
+    25% 100%, 25% 92%, 10% 92%, 10% 78%, 0 78%,
+    0 22%, 10% 22%, 10% 8%, 25% 8%
+  );
+  content: '';
+  opacity: 0.9;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
 .milestones-panel h2,
 .production-section h2 {
+  position: relative;
+  z-index: 1;
   margin: 0 0 18px;
   color: var(--dark-red);
   font-family: 'Silkscreen', monospace;
@@ -636,6 +689,7 @@ button:focus-visible {
 
 .milestones-content {
   position: relative;
+  z-index: 1;
   min-height: 48px;
 }
 
