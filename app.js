@@ -148,12 +148,7 @@ function renderRoadProgress() {
   }
 
   if (progressMeta) {
-    progressMeta.textContent = `${goal.toLocaleString('es-AR')} SUSCRIPTORES`;
-  }
-
-  const goalInput = document.getElementById('goalSubscribersInput');
-  if (goalInput && goalInput.value !== String(goal)) {
-    goalInput.value = String(goal);
+    progressMeta.textContent = 'SUSCRIPTORES';
   }
 }
 
@@ -195,12 +190,25 @@ function bindMetricEditor() {
   const label = document.getElementById('metricEditorLabel');
   const valueInput = document.getElementById('metricEditorValue');
   const cancelButton = document.getElementById('metricEditorCancel');
+  const progressLabel = document.getElementById('progressLabel');
 
-  if (!dialog || !form || !title || !label || !valueInput || !cancelButton) {
+  if (!dialog || !form || !title || !label || !valueInput || !cancelButton || !progressLabel) {
     return;
   }
 
   let activeMetric = null;
+
+  function openEditor(metric, metricLabel) {
+    activeMetric = metric;
+    title.textContent = `Editar ${metricLabel}`;
+    label.textContent = metricLabel;
+    valueInput.value = String(dashboardData[metric]);
+    valueInput.min = metric === 'goalSubscribers' ? '1' : '0';
+    valueInput.setAttribute('aria-label', `Nuevo valor para ${metricLabel}`);
+    dialog.showModal();
+    valueInput.focus();
+    valueInput.select();
+  }
 
   document.getElementById('statsGrid').addEventListener('click', (event) => {
     const card = event.target.closest('[data-metric]');
@@ -210,14 +218,11 @@ function bindMetricEditor() {
 
     const metric = card.dataset.metric;
     const metricLabel = card.querySelector('.stat-label').textContent;
-    activeMetric = metric;
-    title.textContent = `Editar ${metricLabel}`;
-    label.textContent = metricLabel;
-    valueInput.value = String(dashboardData[metric]);
-    valueInput.setAttribute('aria-label', `Nuevo valor para ${metricLabel}`);
-    dialog.showModal();
-    valueInput.focus();
-    valueInput.select();
+    openEditor(metric, metricLabel);
+  });
+
+  progressLabel.addEventListener('click', () => {
+    openEditor('goalSubscribers', 'Meta de suscriptores');
   });
 
   cancelButton.addEventListener('click', () => dialog.close());
@@ -229,8 +234,9 @@ function bindMetricEditor() {
     }
 
     const value = Number(valueInput.value);
-    if (!Number.isSafeInteger(value) || value < 0) {
-      valueInput.setCustomValidity('Ingresa un número entero igual o mayor que cero.');
+    const minimum = activeMetric === 'goalSubscribers' ? 1 : 0;
+    if (!Number.isSafeInteger(value) || value < minimum) {
+      valueInput.setCustomValidity(`Ingresa un número entero igual o mayor que ${minimum}.`);
       valueInput.reportValidity();
       valueInput.setCustomValidity('');
       return;
@@ -240,44 +246,11 @@ function bindMetricEditor() {
     persistDashboardData();
     renderStats();
 
-    if (activeMetric === 'currentSubscribers') {
+    if (activeMetric === 'currentSubscribers' || activeMetric === 'goalSubscribers') {
       renderRoadProgress();
     }
 
     dialog.close();
-  });
-}
-
-function bindProgressControls() {
-  const goalInput = document.getElementById('goalSubscribersInput');
-
-  if (!goalInput) {
-    return;
-  }
-
-  goalInput.value = String(dashboardData.goalSubscribers || 0);
-
-  goalInput.addEventListener('input', (event) => {
-    const value = Number(event.target.value);
-    if (!Number.isSafeInteger(value) || value < 1) {
-      return;
-    }
-
-    dashboardData.goalSubscribers = value;
-    persistDashboardData();
-    renderRoadProgress();
-  });
-
-  goalInput.addEventListener('change', () => {
-    const value = Number(goalInput.value);
-    if (!Number.isSafeInteger(value) || value < 1) {
-      goalInput.value = String(dashboardData.goalSubscribers);
-      return;
-    }
-
-    dashboardData.goalSubscribers = value;
-    persistDashboardData();
-    renderRoadProgress();
   });
 }
 
@@ -410,7 +383,6 @@ function initializeDashboard() {
   renderRoadProgress();
   renderStats();
   bindMetricEditor();
-  bindProgressControls();
   renderCalendar('videos');
   renderCalendar('streams');
   renderMilestones();

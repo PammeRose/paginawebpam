@@ -338,11 +338,27 @@ button:focus-visible {
 }
 
 .progress-label {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   font-family: 'Pixelmix', monospace;
   font-size: 18px;
   line-height: 1.2;
   color: var(--dark-red);
   text-transform: none;
+}
+
+.progress-label:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+}
+
+.progress-label:focus-visible {
+  outline: 2px solid var(--dark-red);
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 .progress-meta {
@@ -351,37 +367,6 @@ button:focus-visible {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dark-red);
-}
-
-.progress-controls {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 8px;
-  width: min(100%, 170px);
-  margin-top: 8px;
-}
-
-.progress-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-family: 'VCR OSD Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--dark-red);
-}
-
-.progress-field input {
-  width: 100%;
-  min-height: 32px;
-  padding: 6px 8px;
-  border: 2px solid var(--dark-red);
-  border-radius: 8px;
-  background: rgba(255, 252, 245, 0.8);
-  color: var(--dark-red);
-  font-family: 'Pixelmix', monospace;
-  font-size: 12px;
 }
 
 .stats-grid {
