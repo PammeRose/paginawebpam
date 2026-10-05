@@ -86,6 +86,48 @@ function normalizeProductionStatus(status) {
   return PRODUCTION_STATUSES.includes(normalized) ? normalized : 'Producción';
 }
 
+function getProjectDateInputValue(value) {
+  const date = String(value || '');
+  const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  let dateParts;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    dateParts = date.split('-').map(Number);
+  } else {
+    const match = date.match(/^(\d{1,2}) de ([a-záéíóú]+) (\d{4})$/i);
+    if (!match) {
+      return '';
+    }
+
+    const month = months.indexOf(match[2].toLowerCase());
+    if (month === -1) {
+      return '';
+    }
+    dateParts = [Number(match[3]), month + 1, Number(match[1])];
+  }
+
+  const [year, month, day] = dateParts;
+  const validatedDate = new Date(year, month - 1, day);
+  if (validatedDate.getFullYear() !== year || validatedDate.getMonth() !== month - 1 || validatedDate.getDate() !== day) {
+    return '';
+  }
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function formatProjectCreated(value) {
+  const inputValue = getProjectDateInputValue(value);
+  if (!inputValue) {
+    return String(value || 'introducir fecha');
+  }
+
+  const [year, month, day] = inputValue.split('-').map(Number);
+  const formatted = new Intl.DateTimeFormat('es-AR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(year, month - 1, day));
+  return formatted.replace(/ de (\d{4})$/, ' $1');
+}
+
 function getProjectProgress(project) {
   const tasks = Array.isArray(project.tasks) ? project.tasks : [];
   if (tasks.length === 0) {
@@ -454,7 +496,7 @@ function renderProduction() {
       const progress = getProjectProgress(project);
       const status = escapeHTML(project.state);
       const name = escapeHTML(project.name);
-      const created = escapeHTML(project.created);
+      const created = escapeHTML(formatProjectCreated(project.created));
       return `
         <button type="button" class="production-card" data-project-id="${escapeHTML(project.id)}" aria-label="Abrir proyecto ${name}">
           <div class="production-header">
@@ -535,12 +577,13 @@ function bindProjectDetails() {
   const dialog = document.getElementById('projectDetailDialog');
   const closeButton = document.getElementById('projectDetailClose');
   const statusSelect = document.getElementById('projectStatus');
+  const createdInput = document.getElementById('projectCreatedInput');
   const taskForm = document.getElementById('projectTaskForm');
   const taskInput = document.getElementById('projectTaskInput');
   const taskList = document.getElementById('projectTaskList');
   const completedGrid = document.getElementById('completedProductionGrid');
 
-  if (!dialog || !closeButton || !statusSelect || !taskForm || !taskInput || !taskList || !completedGrid) {
+  if (!dialog || !closeButton || !statusSelect || !createdInput || !taskForm || !taskInput || !taskList || !completedGrid) {
     return;
   }
 
@@ -555,8 +598,9 @@ function bindProjectDetails() {
     activeProjectId = project.id;
     dialog.dataset.projectId = project.id;
     document.getElementById('projectDetailTitle').textContent = project.name;
-    document.getElementById('projectDetailCreated').textContent = `Creado: ${project.created}`;
+    document.getElementById('projectDetailCreated').textContent = `Creado: ${formatProjectCreated(project.created)}`;
     statusSelect.value = project.state;
+    createdInput.value = getProjectDateInputValue(project.created);
     renderProjectTasks(project);
     dialog.showModal();
   }
@@ -585,6 +629,18 @@ function bindProjectDetails() {
 
     project.state = statusSelect.value;
     moveProjectToStatusCollection(project);
+    persistDashboardData();
+    renderProduction();
+  });
+
+  createdInput.addEventListener('change', () => {
+    const project = findProductionProject(activeProjectId);
+    if (!project) {
+      return;
+    }
+
+    project.created = createdInput.value || 'introducir fecha';
+    document.getElementById('projectDetailCreated').textContent = `Creado: ${formatProjectCreated(project.created)}`;
     persistDashboardData();
     renderProduction();
   });

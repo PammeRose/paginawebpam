@@ -819,11 +819,11 @@ button:focus-visible {
 }
 
 .production-progress-value {
-  flex: 0 0 48px;
-  height: 14px;
+  flex: 0 0 64px;
+  height: 20px;
   font-family: 'Pixelmix Bold', monospace;
-  font-size: 11px;
-  line-height: 14px;
+  font-size: 16px;
+  line-height: 20px;
   color: var(--dark-red);
   text-align: right;
 }
@@ -841,7 +841,7 @@ button:focus-visible {
 
 .progress-track {
   position: relative;
-  height: 14px;
+  height: 20px;
   border: 2px solid var(--dark-red);
   border-radius: 999px;
   background: linear-gradient(180deg, #fffcf5 0%, #d8d5ca 100%);
