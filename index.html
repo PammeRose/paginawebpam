@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PammeRose · Control Center</title>
     <meta name="description" content="PammeRose · Creative Studio · Control Center" />
-    <link rel="stylesheet" href="styles.css?v=pixel-sunset-2" />
-    <script src="app.js?v=milestone-check-1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=production-tasks-1" />
+    <script src="app.js?v=production-tasks-1" defer></script>
   </head>
   <body>
     <div class="page-shell">
@@ -104,6 +104,45 @@
         <h2 id="productionTitle">Producción</h2>
         <div class="production-grid" id="productionGrid"></div>
       </section>
+
+      <section class="production-section completed-production-section" aria-labelledby="completedProductionTitle">
+        <h2 id="completedProductionTitle">Proyectos finalizados</h2>
+        <p class="completed-production-empty" id="completedProductionEmpty">Los proyectos que marques como finalizados aparecerán acá.</p>
+        <div class="production-grid" id="completedProductionGrid"></div>
+      </section>
+
+      <dialog class="project-dialog" id="projectDetailDialog" aria-labelledby="projectDetailTitle">
+        <div class="project-dialog-content">
+          <header class="project-dialog-header">
+            <div>
+              <h2 id="projectDetailTitle">Detalle del proyecto</h2>
+              <p class="project-dialog-created" id="projectDetailCreated"></p>
+            </div>
+            <button class="project-detail-close" id="projectDetailClose" type="button" aria-label="Cerrar detalle">×</button>
+          </header>
+
+          <label class="project-status-label" for="projectStatus">Estado</label>
+          <select class="project-status-select" id="projectStatus">
+            <option>Producción</option>
+            <option>Edición</option>
+            <option>Grabación</option>
+            <option>Pausado</option>
+            <option>Finalizado</option>
+          </select>
+
+          <section class="project-tasks-section" aria-labelledby="projectTasksTitle">
+            <div class="project-tasks-heading">
+              <h3 id="projectTasksTitle">Lista de tareas</h3>
+              <span id="projectTaskSummary">0 de 0 tareas · 0%</span>
+            </div>
+            <form class="project-task-form" id="projectTaskForm">
+              <input class="project-task-input" id="projectTaskInput" type="text" maxlength="180" placeholder="Agregar un paso..." aria-label="Nueva tarea del proyecto" required />
+              <button class="project-task-add" type="submit">Agregar</button>
+            </form>
+            <ul class="project-task-list" id="projectTaskList"></ul>
+          </section>
+        </div>
+      </dialog>
     </div>
   </body>
 </html>
