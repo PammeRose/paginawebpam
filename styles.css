@@ -636,8 +636,7 @@ button:focus-visible {
 
 .milestones-content {
   position: relative;
-  min-height: 170px;
-  padding-top: 10px;
+  min-height: 48px;
 }
 
 .milestone-node {
